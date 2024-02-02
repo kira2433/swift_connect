@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error | {{ application_name }}</title>  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> </head>
+<body>
+    <h1>An error occurred</h1>
+    <p>{{ error_message }}</p> <p>Please try again later, or contact support if the issue persists.</p>
+    <p>Return to <a href="{{ url_for('auth.login_user') }}">home page</a>.</p> </body>
+</html>

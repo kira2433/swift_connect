@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SWIFT Connect - Request Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/DwwoC2MPk8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Submit Request</h1>
+
+        {% if request.method == 'POST' and form_errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in form_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/request/process_form" class="mt-4">
+            <div class="mb-3">
+                <label for="swift_address" class="form-label">SWIFT Address:</label>
+                <input type="text" name="swift_address" id="swift_address"  class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="end_user_details" class="form-label">End User Details:</label>
+                <textarea name="end_user_details" id="end_user_details" class="form-control"> </textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="platform_integration_details" class="form-label">Platform Integration Details:</label>
+                <textarea name="platform_integration_details" id="platform_integration_details" class="form-control"> </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+            <button class="btn btn-primary" onclick="clearTextarea()">Clear</button>
+        </form>
+    </div>
+</body>
+<script>
+function clearTextarea() {
+    document.getElementById("platform_integration_details").value = "";
+    document.getElementById("end_user_details").value = "";
+    document.getElementById("swift_address").value = "";
+}
+</script>
+</html>

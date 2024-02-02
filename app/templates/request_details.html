@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SWIFT Connect - Request Details</title>
+</head>
+<body>
+    <h1>Request Details</h1>
+    <table>
+        </table>
+    {% if current_user.role == 'administrator' %}
+        <a href="/requests/{{ request_id }}/edit">Edit Request</a>
+        <a href="/requests/{{ request_id }}/process">Process Request</a>
+    {% endif %}
+</body>
+</html>
