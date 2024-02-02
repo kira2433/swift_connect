@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 def connect_to_database():
     # Establish connection using your database credentials
     try:
-        host = os.environ.get("DB_HOST", "127.0.0.1")
+        host = os.environ.get("DB_HOST", "db")
         user = os.environ.get("DB_USER", "root")
         password = os.environ.get("DB_PASSWORD", "root")
         database = os.environ.get("DB_DATABASE", "swift_connect")
@@ -16,7 +16,6 @@ def connect_to_database():
         db = mysql.connector.connect(
             host=host,
             user=user,
-            port=3336, 
             password=password,
             database=database
         )
@@ -24,7 +23,7 @@ def connect_to_database():
     except mysql.connector.Error as err:
         print("Database connection error:", err)
         return None  # Or raise an exception for further handling
-    return db
+
 
 def execute_query(db, query, params=None):
     cursor = db.cursor()

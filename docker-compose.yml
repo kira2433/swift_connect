@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  flask_app:
+    build: .
+    restart: unless-stopped  # Restart app on container exit
+    ports:
+      - "5000:5000"  # Map container port to host port
+    volumes:
+      - .:/app  # Mount app code directory
+    environment:  # Pass environment variables from .env file
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=swift_connect
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.8
+    restart: unless-stopped  # Restart DB on container exit
+    volumes:
+      - db_data:/var/lib/mysql  # Persistent storage for data
+    environment:
+      - MYSQL_ROOT_PASSWORD=root  # Set root password securely
+    ports:
+      - "3336:3336"  # Map container port to host port (adjusted if needed)
+
+volumes:
+  db_data:
